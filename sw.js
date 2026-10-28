@@ -1,6 +1,6 @@
 // Offline cache for the phone app's own files (the page, its scripts, styles and icons), so it opens without a
 // connection. Market data (Binance, Deribit, FYERS) is never cached: it always goes to the network.
-const CACHE = "smartentry-v1";
+const CACHE = "smartentry-v2";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((c) => c.addAll(["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png"])));
