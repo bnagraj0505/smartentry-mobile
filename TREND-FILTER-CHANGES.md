@@ -1,6 +1,6 @@
 # Trend filter patch (applied to the built app)
 
-These changes were made directly in the compiled bundle (`assets/device-trendf03.js`).
+These changes were made directly in the compiled bundle (`assets/device-trendf04.js`).
 Port them into the source before your next build, or the build will overwrite them.
 
 ## What changed in the chart signals (pullback + SMC reversal)
@@ -65,3 +65,13 @@ an option's price (premium paid, "Entry (premium)") is left as it was.
 
 - A saved Redirect URL pointing at 127.0.0.1 / localhost is ignored when the app runs from a real web
   address; the page's own address is sent instead. The FYERS tab notes this next to the address to register.
+
+## FYERS login on iPhone (Safari handoff)
+
+- iPhone keeps Home Screen web apps' storage separate from Safari. When the FYERS login returns to Safari,
+  Safari has no saved App ID / Secret / login state. Instead of failing, that page now shows a one-time
+  login code with a Copy button.
+- The FYERS tab in the app has a "Paste login code" button: it checks the code against the pending Connect
+  (same state, under 10 minutes old), exchanges it for the access token in the app itself and reloads connected.
+- Code: `seExchange`, `seFinish`, `sePaste`, `seHandoff` before the login-return function; the return function
+  hands off when this storage has no pending login.
